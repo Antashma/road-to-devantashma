@@ -28,8 +28,13 @@ console.log(tracker.answerCall());   // "No calls in queue"
 
 */
 
-class Queue {
+class RecentCallTracker {
     constructor() {
-        
+        const incoming = [];
+        const answering = [];
+    }
+
+    recieveCall(callid) {
+        incoming.push(callId)
     }
 }
