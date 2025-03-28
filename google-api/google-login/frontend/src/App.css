@@ -40,3 +40,26 @@
 .read-the-docs {
   color: #888;
 }
+
+nav a {
+  color: goldenrod;
+}
+
+nav a:hover {
+  color: cornsilk;
+}
+
+nav a::before {
+  content: " // ";
+  color: #666;
+}
+
+a.auth-btn {
+  background-color: crimson;
+  padding:5px;
+  color:white;
+  border-radius: 3px;
+  box-shadow: 2px 2px 3px #111;
+  text-transform: uppercase;
+  font-size: 14px;
+}

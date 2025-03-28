@@ -11,26 +11,26 @@ module.exports = function(passport) {
             callbackURL: "/auth/google/callback"
         }, 
         async (accessToken, refreshToken, profile, done) => {
-            // const existingUser = await User.findOne({
-            //     googleId: profile.id
-            // })
+            const existingUser = await User.findOne({
+                googleId: profile.id
+            })
         
-        // if (existingUser) {
-        //     return done(null, existingUser);
-        // }
+        if (existingUser) {
+            return done(null, existingUser);
+        }
 
-        // const newUser = await new User({
-        //     googleId: profile.id,
-        //     displayName: profile.displayName,
-        //     email: profile.emails[0].value
-        // }).save();
+        const newUser = await new User({
+            googleId: profile.id,
+            displayName: profile.displayName,
+            email: profile.emails[0].value
+        }).save();
 
-        // done(null, newUser);
         console.log(profile);
+        done(null, newUser);
     }));
 
     passport.serializeUser((user, done) => {
-        done(null, user.id);
+        done(null, user);
     });
 
     passport.deserializeUser((id, done) => {

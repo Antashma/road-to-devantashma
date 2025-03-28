@@ -1,12 +1,23 @@
+import { Routes, Route, Link } from 'react-router';
 import './App.css'
+import Login from './Login';
+import Dashboard from './Dashboard';
 
 function App() {
 
   return (
     <>
-     <h1><i class="fa-solid fa-list-check"></i> FocusTask</h1>
-     <p>Create a goal and make progress today.</p>
-     <a href="http://localhost:8000/auth/google"><i className="fa-brands fa-google"></i> Login with Google</a>
+      <h1><i className="fa-solid fa-list-check"></i> FocusTask</h1>
+      <nav>
+        <Link to="/">Login</Link>
+        <Link to="/dashboard">Dashboard</Link> 
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+  
     </>
   )
 }

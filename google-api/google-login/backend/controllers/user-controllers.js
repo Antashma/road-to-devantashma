@@ -1,32 +1,21 @@
-const passport = require("passport");
-
-
-// function login(){
-//     passport.authenticate("google", {scope: ["profile", "email"]});
-// }
-
-// function callback() {
-//     passport.authenticate("google", {failureRedirect: "/"});
-//     res.redirect("/dashboard");
-// }
-
 async function logout(req, res) {
-    req.logout();
-    res.redirect("/");
+        req.session = null;
+        res.redirect("http://localhost:5173/");    
 }
 
-async function dashboard(req, res) {
-    res.send(`Welcome, ${req.user.displayName}!`);
-}
-
-async function test(req, res) {
-    res.send("Hello world!!!")
+async function getUser(req, res) {
+    res.send(req.session);
+    // if (!req.session.isPopulated) {
+    //     return res.status(400).json({msg: "No session in place!"})
+    // }
+    // const { firstName, image } = req.session.passport.user;
+    // res.status(200).json({data: {
+    //     name: firstName,
+    //     imageUrl: image
+    // }});
 }
 
 module.exports = {
-    // login,
-    // callback,
-    dashboard,
     logout,
-    test
+    getUser
 }
