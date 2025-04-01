@@ -8,10 +8,10 @@ function Dashboard() {
 
   async function getUserData(){
     try {
-      const res = await axios.get("http://localhost:8000/auth/user")
-      console.log(res);
+      const res = await axios.get("http://localhost:8000/auth/user", {withCredentials: true})
+      setUser(res.data);
     } catch (err) {
-      console.error(err)
+      console.error({msg: "Error fetching user", err})
     }
   }
 
@@ -21,9 +21,12 @@ function Dashboard() {
 
   return (
     <>
-        <img src={user?.imageUrl} />
-        <p>Welcome, {user?.name}! Here is your goal and tasks to focus on</p>
-        <a href="http://localhost:8000/auth/logout" className='auth-btn'><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    { user ? 
+    <div className="container">
+        <img src={user.image} />
+        <p>Welcome, {user.firstName}! Here is your goal and tasks to focus on</p>
+        <a href="http://localhost:8000/auth/logout" className='auth-btn'><i className="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </div> : <p>Loading...</p> }
     </>
   )
 }

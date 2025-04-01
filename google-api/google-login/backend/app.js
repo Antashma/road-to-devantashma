@@ -12,13 +12,19 @@ require("./config/passport")(passport);
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 
 //sessions
 app.use(session({
     name: "focusTaskSession",
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [process.env.COOKIE_KEY]
+    keys: [process.env.COOKIE_KEY],
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "none"
 }));
 
 //passport middleware
