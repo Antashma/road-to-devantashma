@@ -9,7 +9,7 @@ router.route("/auth/google").get(passport.authenticate("google", {scope: ["profi
 
 router.route("/auth/google/callback")
     .get(
-        passport.authenticate("google", {failureRedirect: "/"}),
+        passport.authenticate("google", {failureRedirect: "http://localhost:5173/"}),
         (req, res) => res.redirect("http://localhost:5173/dashboard")
     );
 
