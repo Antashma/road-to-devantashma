@@ -28,7 +28,6 @@ Processing Task A for 3ms. Remaining: 1ms.
 Processing Task B for 2ms. Completed.
 Processing Task C for 3ms. Remaining: 3ms.
 Processing Task A for 1ms. Completed.
-Processing Task C for 3ms. Remaining: 0ms.
 Processing Task C for 3ms. Completed.
 All tasks completed!
 
@@ -95,25 +94,33 @@ class Queue {
 
 class TaskScheduler {
     constructor(timeSlice) {
+        if (timeSlice <= 0 ) throw Error("Time slice must be greater than 0!")
         this.queue = new Queue();
         this.timeSlice = timeSlice;
     }
 
-    addTask(name, time) {
-        this.queue.enqueue({name, time});
+    addTask(name, time, priority = 2) {
+        const newTask = {name, time, priority}
+        this.queue.enqueue(newTask);
+        if (this.queue.items.length > 1) this.queue.items.sort((a, b) => a.priority - b.priority);
     }
 
     run() {
+        if (this.queue.isEmpty()) {
+            console.log("No tasks to run!");
+            return;
+        }
+
         while (!this.queue.isEmpty()) {
-            const removed = this.queue.dequeue();
-            const newTime = removed.time - this.timeSlice;
+            const task = this.queue.dequeue();
+            const newTime = task.time - this.timeSlice;
 
             console.log(
-                `Processing ${removed.name} for ${newTime < 0 ? removed.time : this.timeSlice}ms. ${newTime < 0 ? "Completed" : "Remaining: " + newTime + "ms"}.`
+                `Processing ${task.name} for ${newTime < 0 ? task.time : this.timeSlice}ms. ${newTime <= 0 ? "Completed" : "Remaining: " + newTime + "ms"}.`
             );
 
-            removed.time = newTime;
-            if (removed.time >= 0) this.queue.enqueue(removed);
+            task.time = newTime;
+            if (task.time > 0) this.queue.enqueue(task);
         }
 
         console.log("All tasks completed!")
@@ -122,21 +129,22 @@ class TaskScheduler {
 
 //TESTS
 const scheduler1 = new TaskScheduler(3); // Quantum time = 3ms
-scheduler1.addTask("Task A", 4);
+scheduler1.addTask("Task A", 4, 3);
 scheduler1.addTask("Task B", 2);
-scheduler1.addTask("Task C", 6);
+scheduler1.addTask("Task C", 6, 1);
+// console.log(scheduler1.queue);
 scheduler1.run();
 
 
-const scheduler2 = new TaskScheduler(5);
-scheduler2.addTask("Task X", 2);
-scheduler2.addTask("Task Y", 4);
-scheduler2.run();
+// const scheduler2 = new TaskScheduler(5);
+// scheduler2.addTask("Task X", 2);
+// scheduler2.addTask("Task Y", 4);
+// scheduler2.run();
 
-const scheduler3 = new TaskScheduler(2);
-scheduler3.addTask("Alpha", 5);
-scheduler3.addTask("Beta", 3);
-scheduler3.addTask("Gamma", 7);
-scheduler3.run();
+// const scheduler3 = new TaskScheduler(2);
+// scheduler3.addTask("Alpha", 5);
+// scheduler3.addTask("Beta", 3);
+// scheduler3.addTask("Gamma", 7);
+// scheduler3.run();
 
 
