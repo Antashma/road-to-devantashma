@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Pokemon!</title>
+</head>
+<body>
+    <header>
+        <h1>Pokemon Info Grabber</h1>
+    </header>
+    
+    <main>
+        <p>Enter pokemon name below to grab info.</p>
+        <input type="text" name="pkmName" id="pkmName" placeholder="ditto"/>
+        <button id="submitBtn">Get Info!</button>
+        
+        <section id="result">
+
+        </section>
+    </main>
+
+    <footer>
+        Fetch practice project made with 💖 and ☕.  
+        Used the much respected <a href="https://pokeapi.co">PokeApi</a> for pokemon data. 
+    </footer>
+
+<script>
+    async function fetchData(name = "ditto") {
+        const baseUrl = "https://pokeapi.co/api/v2/pokemon/"
+        try {
+            const response = await fetch(baseUrl + name.trim());
+            
+            if (!response.ok) {
+                throw Error(`Error getting pokemon data...please check pokemon name and try again.`)
+            }
+            
+            const data = await response.json();
+            console.log(data);
+
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const submitBtn = document.querySelector("#submitBtn");
+    const nameInput = document.querySelector("#pkmName");
+    submitBtn.addEventListener("click", () => fetchData(nameInput.value));
+</script>
+
+</body>
+</html>
