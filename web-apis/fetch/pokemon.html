@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fetch Pokemon!</title>
+    <style>
+        .types-container {
+            display: flex;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -26,7 +31,7 @@
     </footer>
 
 <script>
-    async function fetchData(name = "ditto") {
+    async function fetchData(name) {
         const baseUrl = "https://pokeapi.co/api/v2/pokemon/"
         try {
             const response = await fetch(baseUrl + name.trim());
@@ -37,6 +42,7 @@
             
             const data = await response.json();
             console.log(data);
+            createCard(data);
 
         } catch (err) {
             console.error(err)
@@ -46,6 +52,38 @@
     const submitBtn = document.querySelector("#submitBtn");
     const nameInput = document.querySelector("#pkmName");
     submitBtn.addEventListener("click", () => fetchData(nameInput.value));
+
+    const section = document.querySelector("#result");
+
+    function createCard(info){
+        const header = document.createElement("h2");
+        header.textContent = `${info.name.toUpperCase()} | Dex No. ${info.id}`;
+
+
+        const imgDiv = document.createElement("div");
+
+        const sprite = document.createElement("img");
+        sprite.src = info.sprites.front_default;
+
+        const shinySprite = document.createElement("img");
+        shinySprite.src = info.sprites.front_shiny;
+
+        imgDiv.append(sprite, shinySprite)
+
+        const typeDiv = document.createElement("div");
+        typeDiv.classList.add("types-container")
+        info.types.forEach((t, index) => {
+            const typeP = document.createElement("p");
+            typeP.textContent = `${index === 1 ? "/" : ""}${t.type.name}`
+            typeDiv.append(typeP);
+        })
+        
+
+
+        section.append(header);
+        section.append(typeDiv);
+        section.append(imgDiv);
+    }
 </script>
 
 </body>
