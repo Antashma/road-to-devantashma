@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Pokemon!</title>
+    <style>
+        .types-container {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pokemon Info Grabber</h1>
+    </header>
+    
+    <main>
+        <p>Enter pokemon name below to grab info.</p>
+        <input type="text" name="pkmName" id="pkmName" placeholder="ditto"/>
+        <button id="submitBtn">Get Info!</button>
+        
+        <section id="result">
+
+        </section>
+    </main>
+
+    <footer>
+        Fetch practice project made with 💖 and ☕.  
+        Used the much respected <a href="https://pokeapi.co">PokeApi</a> for pokemon data. 
+    </footer>
+
+<script>
+    async function fetchData(name) {
+        const baseUrl = "https://pokeapi.co/api/v2/pokemon/"
+        try {
+            const response = await fetch(baseUrl + name.trim());
+            
+            if (!response.ok) {
+                throw Error(`Error getting pokemon data...please check pokemon name and try again.`)
+            }
+            
+            const data = await response.json();
+            console.log(data);
+            createCard(data);
+
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const submitBtn = document.querySelector("#submitBtn");
+    const nameInput = document.querySelector("#pkmName");
+    submitBtn.addEventListener("click", () => fetchData(nameInput.value));
+
+    const section = document.querySelector("#result");
+
+    function createCard(info){
+        const header = document.createElement("h2");
+        header.textContent = `${info.name.toUpperCase()} | Dex No. ${info.id}`;
+
+
+        const imgDiv = document.createElement("div");
+
+        const sprite = document.createElement("img");
+        sprite.src = info.sprites.front_default;
+
+        const shinySprite = document.createElement("img");
+        shinySprite.src = info.sprites.front_shiny;
+
+        imgDiv.append(sprite, shinySprite)
+
+        const typeDiv = document.createElement("div");
+        typeDiv.classList.add("types-container")
+        info.types.forEach((t, index) => {
+            const typeP = document.createElement("p");
+            typeP.textContent = `${index === 1 ? "/" : ""}${t.type.name}`
+            typeDiv.append(typeP);
+        })
+        
+
+
+        section.append(header);
+        section.append(typeDiv);
+        section.append(imgDiv);
+    }
+</script>
+
+</body>
+</html>
