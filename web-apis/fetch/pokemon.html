@@ -16,8 +16,8 @@
     </header>
     
     <main>
-        <p>Enter pokemon name below to grab info.</p>
-        <input type="text" name="pkmName" id="pkmName" placeholder="ditto"/>
+        <p>Enter pokemon name or id below to grab their info.</p>
+        <input type="text" name="pkmName" id="pkmName" placeholder="ditto" />
         <button id="submitBtn">Get Info!</button>
         
         <section id="result">
@@ -26,12 +26,17 @@
     </main>
 <hr />
     <footer>
-        Fetch practice project made with 💖 and ☕.  
-        Used the much respected <a href="https://pokeapi.co">PokeApi</a> for pokemon data. 
+        <p>Fetch practice project made with 💖 and ☕ by <a href="https://github.com/Antashma">Antashma</a></p>
+        <p> 
+        Used the much respected <a href="https://pokeapi.co">PokeApi</a> for pokemon data.</p>
+        <p>Pokémon and Pokémon character names are trademarks of Nintendo.</p>
+        
     </footer>
 
 <script>
     async function fetchData(name) {
+        if (name.trim() === "") name = "ditto";
+
         const pkmBaseUrl = "https://pokeapi.co/api/v2/pokemon/";
         const speciesBaseUrl = "https://pokeapi.co/api/v2/pokemon-species/";
 
@@ -51,8 +56,9 @@
 
             const pkmData = await pkmResponse.json();
             const speciesData = await speciesResposne.json();
+            console.log({speciesData})
 
-            const flavorText = speciesData.flavor_text_entries.find(entry => entry.language.name === "en").flavor_text;
+            const flavorText = speciesData.flavor_text_entries.find(entry => entry.language.name === "en").flavor_text || "Dex entry not available.";
 
             const formatFlavorText = () => {
                 const arr = [];
