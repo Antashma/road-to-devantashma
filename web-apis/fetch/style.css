@@ -86,8 +86,9 @@ section#result {
     height: 100%;
 
     background-repeat: no-repeat;
-    background-position: 100% 25%;
-    filter: opacity(60%);
+    background-size:contain;
+    background-position: right;
+    filter: opacity(30%);
 }
 
 .card-contents {
