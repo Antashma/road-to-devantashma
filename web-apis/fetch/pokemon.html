@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fetch Pokemon!</title>
-    <style>
-        .types-container {
-            display: flex;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Metal&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -24,7 +23,7 @@
 
         </section>
     </main>
-<hr />
+
     <footer>
         <p>Fetch practice project made with 💖 and ☕ by <a href="https://github.com/Antashma">Antashma</a></p>
         <p> 
@@ -95,14 +94,34 @@
     const section = document.querySelector("#result");
 
 
-    function createCard({ pkmData, formattedText: flavorText }){
-        const header = document.createElement("h2");
-        header.textContent = `${pkmData.name.toUpperCase()} | Dex No. ${pkmData.id}`;
+    function createCard({ pkmData, formattedText: flavorText }) {
+        const container = document.createElement("article");
+        container.classList.add("card--container");
+       
+        const bgImgContainer = document.createElement("div");
+        bgImgContainer.classList.add("bg-img");
+        bgImgContainer.style.backgroundImage = `url(${pkmData.sprites.other["official-artwork"].front_default})`;
+
+        const cardContents = document.createElement("div");
+        cardContents.classList.add("card-contents");
+
+        const leftContents = document.createElement("div");
+        leftContents.classList.add("left");
+
+        const rightContents = document.createElement("div");
+        rightContents.classList.add("right");
+        // rightContents.style.backgroundImage = `url(${pkmData.sprites.other["official-artwork"].front_default})`;
+
+        const pokeNameH2 = document.createElement("h2");
+        pokeNameH2.textContent = pkmData.name;
+
+        const pokeIdH3 = document.createElement("h3");
+        pokeIdH3.textContent = `No. ${pkmData.id}`;
 
         const fTextP = document.createElement("p");
         fTextP.textContent = flavorText;
 
-        const imgDiv = document.createElement("div");
+        const gameSpritesDiv = document.createElement("div");
 
         const sprite = document.createElement("img");
         sprite.src = pkmData.sprites.front_default;
@@ -110,7 +129,7 @@
         const shinySprite = document.createElement("img");
         shinySprite.src = pkmData.sprites.front_shiny;
 
-        imgDiv.append(sprite, shinySprite)
+        gameSpritesDiv.append(sprite, shinySprite)
 
         const typeDiv = document.createElement("div");
         typeDiv.classList.add("types-container")
@@ -119,15 +138,29 @@
             typeP.textContent = `${index === 1 ? "/" : ""}${t.type.name}`
             typeDiv.append(typeP);
         })
-        
 
+        leftContents.append(
+            pokeIdH3, 
+            typeDiv, 
+            gameSpritesDiv
+        );
 
-        section.prepend(
-            header,
-            typeDiv,
-            imgDiv,
+        rightContents.append(
             fTextP,
         );
+
+        cardContents.append(
+            pokeNameH2,
+            leftContents,
+            rightContents
+        )
+        
+        container.append(
+            bgImgContainer,
+            cardContents
+        );
+
+        section.prepend(container);
     }
 </script>
 
