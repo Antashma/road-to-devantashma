@@ -79,8 +79,11 @@
             }
 
             const formattedText = formatFlavorText();
-            console.log({pkmData, formattedText})
-            createCard({ pkmData, formattedText });
+
+            const genus = speciesData.genera.find(entry => entry.language.name === "en").genus || "Genus not available.";
+
+            console.log({pkmData, genus, formattedText})
+            createCard({ pkmData, genus, formattedText });
 
         } catch (err) {
             console.error(err);
@@ -94,7 +97,7 @@
     const section = document.querySelector("#result");
 
 
-    function createCard({ pkmData, formattedText: flavorText }) {
+    function createCard({ pkmData, genus, formattedText: flavorText }) {
         const container = document.createElement("article");
         container.classList.add("card--container");
        
@@ -110,7 +113,6 @@
 
         const rightContents = document.createElement("div");
         rightContents.classList.add("right");
-        // rightContents.style.backgroundImage = `url(${pkmData.sprites.other["official-artwork"].front_default})`;
 
         const pokeNameH2 = document.createElement("h2");
         pokeNameH2.textContent = pkmData.name;
@@ -118,18 +120,33 @@
         const pokeIdH3 = document.createElement("h3");
         pokeIdH3.textContent = `No. ${pkmData.id}`;
 
+        const genusP = document.createElement("p");
+        genusP.classList.add("genus");
+        genusP.textContent = genus;
+
+        const cryAudio = document.createElement("audio");
+        cryAudio.src = pkmData.cries.latest;
+        cryAudio.controls = true;
+        cryAudio.autoplay = true;
+        cryAudio.volume = 0.1;
+
         const fTextP = document.createElement("p");
         fTextP.textContent = flavorText;
 
-        const gameSpritesDiv = document.createElement("div");
+        const spriteImg = document.createElement("img");
+        const spriteSrcArr = [
+            pkmData.sprites.front_default, 
+            pkmData.sprites.front_shiny
+        ]
+        spriteImg.src = spriteSrcArr[0];
 
-        const sprite = document.createElement("img");
-        sprite.src = pkmData.sprites.front_default;
-
-        const shinySprite = document.createElement("img");
-        shinySprite.src = pkmData.sprites.front_shiny;
-
-        gameSpritesDiv.append(sprite, shinySprite)
+        spriteImg.addEventListener("click", (evt) => {
+            if (evt.target.src === spriteSrcArr[0]) {
+                evt.target.src = spriteSrcArr[1];
+            } else {
+                evt.target.src = spriteSrcArr[0];
+            }
+        })
 
         const typeDiv = document.createElement("div");
         typeDiv.classList.add("types-container")
@@ -142,10 +159,12 @@
         leftContents.append(
             pokeIdH3, 
             typeDiv, 
-            gameSpritesDiv
+            spriteImg
         );
 
         rightContents.append(
+            genusP,
+            cryAudio,
             fTextP,
         );
 
@@ -162,6 +181,10 @@
 
         section.prepend(container);
     }
+
+
+
+
 </script>
 
 </body>

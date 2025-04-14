@@ -111,12 +111,16 @@ h2 {
     text-transform: capitalize;
     border-bottom: 1px solid silver;
 
+    font-weight: normal;
+
 }
 
 h3 {
     color: #666;
     font-family: "Metal", 'Times New Roman', Times, serif;
     /* font-style: italic; */
+    font-weight: normal;
+
 }
 
 .types-container {
@@ -126,13 +130,21 @@ h3 {
 }
 
 .left {
-    width: 30%;
+    width: 20%;
+}
+
+.left img {
+    cursor: pointer;
 }
 
 .right {
-    width: 70%;
+    width: 80%;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.genus {
+    font-style: italic;
 }
