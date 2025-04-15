@@ -39,6 +39,12 @@ header, footer {
     background-color: firebrick;
     color: #fff;
     padding:0 20px;
+    min-height: 10vh;
+}
+
+header {
+    display: flex;
+    align-items: center;
 }
 
 footer {
@@ -62,6 +68,7 @@ main {
     padding: 20px;
     width: 800px;
     margin: 0 auto;
+    min-height: 80vh;
 }
 
 section#result {
@@ -102,6 +109,12 @@ section#result {
     flex-wrap: wrap;
 }
 
+.card--container a {
+    font-size: small;
+    text-transform: uppercase;
+    color: dodgerblue;
+}
+
 h2 {
     width: 100%;
 
@@ -111,7 +124,7 @@ h2 {
     text-transform: capitalize;
     border-bottom: 1px solid silver;
 
-    font-weight: normal;
+    font-weight: normal;    
 
 }
 

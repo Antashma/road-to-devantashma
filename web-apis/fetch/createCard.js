@@ -1,4 +1,6 @@
 function createCard({ pkmData, genus, formattedText: flavorText }) {
+    const section = document.querySelector("#result");
+
     const container = document.createElement("article");
     container.classList.add("card--container");
    
@@ -61,6 +63,14 @@ function createCard({ pkmData, genus, formattedText: flavorText }) {
         typeDiv.append(typeP);
     })
 
+    const offLinkP = document.createElement("p");
+    const offLinkA = document.createElement("a");
+    offLinkA.href = "https://www.pokemon.com/us/pokedex/" + pkmData.id;
+    offLinkA.target = "_blank";
+    offLinkA.textContent = "View on Pokemon.com";
+
+    offLinkP.append(offLinkA);
+
     leftContents.append(
         pokeIdH3, 
         typeDiv, 
@@ -71,12 +81,13 @@ function createCard({ pkmData, genus, formattedText: flavorText }) {
         genusP,
         cryAudio,
         fTextP,
+        offLinkP
     );
 
     cardContents.append(
         pokeNameH2,
         leftContents,
-        rightContents
+        rightContents,
     )
     
     container.append(

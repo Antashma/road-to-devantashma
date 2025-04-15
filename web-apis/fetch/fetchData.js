@@ -1,18 +1,21 @@
+import formatName from "./formatName.js";
+
 async function fetchData(name) {
     if (name.trim() === "") name = "ditto";
+    name = formatName(name.trim());
 
     const pkmBaseUrl = "https://pokeapi.co/api/v2/pokemon/";
     const speciesBaseUrl = "https://pokeapi.co/api/v2/pokemon-species/";
 
     try {
-        const pkmResponse = await fetch(pkmBaseUrl + name.trim());
+        const pkmResponse = await fetch(pkmBaseUrl + name);
 
         
         if (!pkmResponse.ok) {
-            throw Error(`Error getting pokemon data...please check pokemon name and try again.`);
+            throw Error(`Error getting pokemon data...please check pokemon name or id and try again.`);
         }
 
-        const speciesResposne = await fetch(speciesBaseUrl + name.trim());
+        const speciesResposne = await fetch(speciesBaseUrl + name);
 
         if (!speciesResposne.ok) {
             throw Error(`Error getting pokemon dex data...please try again.`);
@@ -52,5 +55,8 @@ async function fetchData(name) {
 
     } catch (err) {
         console.error(err);
+        alert(err)
     }
 }
+
+export default fetchData;
