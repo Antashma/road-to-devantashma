@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Metal&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <script src="./createCard.js" type="text/javascript"></script>
+    <script src="./fetchData.js" type="text/javascript"></script>
 </head>
 <body>
     <header>
@@ -33,62 +36,7 @@
     </footer>
 
 <script>
-    async function fetchData(name) {
-        if (name.trim() === "") name = "ditto";
-
-        const pkmBaseUrl = "https://pokeapi.co/api/v2/pokemon/";
-        const speciesBaseUrl = "https://pokeapi.co/api/v2/pokemon-species/";
-
-        try {
-            const pkmResponse = await fetch(pkmBaseUrl + name.trim());
- 
-            
-            if (!pkmResponse.ok) {
-                throw Error(`Error getting pokemon data...please check pokemon name and try again.`);
-            }
-
-            const speciesResposne = await fetch(speciesBaseUrl + name.trim());
-
-            if (!speciesResposne.ok) {
-                throw Error(`Error getting pokemon dex data...please try again.`);
-            }
-
-            const pkmData = await pkmResponse.json();
-            const speciesData = await speciesResposne.json();
-            console.log({speciesData})
-
-            const flavorText = speciesData.flavor_text_entries.find(entry => entry.language.name === "en").flavor_text || "Dex entry not available.";
-
-            const formatFlavorText = () => {
-                const arr = [];
-                flavorText.split(" ").forEach(word => {
-                    if (word.match(/[\n\f]/g)) {
-                        const newWord = []
-                        word.split("").forEach(c => {
-                            if (c.match(/[\n\f]/g)) {
-                                newWord.push(" ")
-                            } else newWord.push(c)
-                        })
-                        arr.push(newWord.join(""));
-                    } else {
-                        arr.push(word)
-                    }
-                })
-                const result = arr.join(" ");
-                return result;
-            }
-
-            const formattedText = formatFlavorText();
-
-            const genus = speciesData.genera.find(entry => entry.language.name === "en").genus || "Genus not available.";
-
-            console.log({pkmData, genus, formattedText})
-            createCard({ pkmData, genus, formattedText });
-
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    
 
     const submitBtn = document.querySelector("#submitBtn");
     const nameInput = document.querySelector("#pkmName");
@@ -97,92 +45,7 @@
     const section = document.querySelector("#result");
 
 
-    function createCard({ pkmData, genus, formattedText: flavorText }) {
-        const container = document.createElement("article");
-        container.classList.add("card--container");
-       
-        const bgImgContainer = document.createElement("div");
-        bgImgContainer.classList.add("bg-img");
-        bgImgContainer.style.backgroundImage = `url(${pkmData.sprites.other["official-artwork"].front_default})`;
-
-        const cardContents = document.createElement("div");
-        cardContents.classList.add("card-contents");
-
-        const leftContents = document.createElement("div");
-        leftContents.classList.add("left");
-
-        const rightContents = document.createElement("div");
-        rightContents.classList.add("right");
-
-        const pokeNameH2 = document.createElement("h2");
-        pokeNameH2.textContent = pkmData.name;
-
-        const pokeIdH3 = document.createElement("h3");
-        pokeIdH3.textContent = `No. ${pkmData.id}`;
-
-        const genusP = document.createElement("p");
-        genusP.classList.add("genus");
-        genusP.textContent = genus;
-
-        const cryAudio = document.createElement("audio");
-        cryAudio.src = pkmData.cries.latest;
-        cryAudio.controls = true;
-        cryAudio.autoplay = true;
-        cryAudio.volume = 0.1;
-
-        const fTextP = document.createElement("p");
-        fTextP.textContent = flavorText;
-
-        const spriteImg = document.createElement("img");
-        const spriteSrcArr = [
-            pkmData.sprites.front_default, 
-            pkmData.sprites.front_shiny
-        ]
-        spriteImg.src = spriteSrcArr[0];
-
-        spriteImg.addEventListener("click", (evt) => {
-            if (evt.target.src === spriteSrcArr[0]) {
-                evt.target.src = spriteSrcArr[1];
-            } else {
-                evt.target.src = spriteSrcArr[0];
-            }
-        })
-
-        const typeDiv = document.createElement("div");
-        typeDiv.classList.add("types-container")
-        pkmData.types.forEach((t, index) => {
-            const typeP = document.createElement("p");
-            typeP.textContent = `${index === 1 ? "/" : ""}${t.type.name}`
-            typeDiv.append(typeP);
-        })
-
-        leftContents.append(
-            pokeIdH3, 
-            typeDiv, 
-            spriteImg
-        );
-
-        rightContents.append(
-            genusP,
-            cryAudio,
-            fTextP,
-        );
-
-        cardContents.append(
-            pokeNameH2,
-            leftContents,
-            rightContents
-        )
-        
-        container.append(
-            bgImgContainer,
-            cardContents
-        );
-
-        section.prepend(container);
-    }
-
-
+    
 
 
 </script>
