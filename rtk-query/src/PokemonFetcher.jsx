@@ -6,15 +6,17 @@ export default function PokemonFetcher() {
     const nameOrIdTextRef = useRef("");
     const [isDisabled, setIsDisabled] = useState(true)
     const [getPokemonTrigger, { data, error, isLoading }] = useLazyGetPokemonQuery();
-    // const [getSpeciesTrigger, { data: speciesData, error: speciesError, isLoading: speciesIsLoading }] = useLazyGetPokemonQuery();
 
     const handleClick = () => {
-        getPokemonTrigger(nameOrIdTextRef.current.value);  
+        const pokemonName = nameOrIdTextRef.current.value
+        getPokemonTrigger(pokemonName);
     }
 
     const handleChange = () => {
         setIsDisabled(nameOrIdTextRef.current.value.length < 1)
     }
+
+    
    
 
     return(

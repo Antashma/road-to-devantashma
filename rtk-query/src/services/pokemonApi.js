@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { addToHistory } from "../state/historySlice";
 
 
 export const pokemonApi = createApi({
@@ -16,8 +17,20 @@ export const pokemonApi = createApi({
 
                 const speciesResult = await fetchWithBQ(`pokemon-species/${pokemon.id}`);
                 
-                return speciesResult.data ? {data: {pokemon, species: speciesResult.data}} : {error: speciesResult.error}
-            }
+                if (speciesResult.error) return {error: speciesResult.error}
+
+                const species = speciesResult.data;
+                
+                return {data: {pokemon, species}}
+            },
+            async onQueryStarted(nameOrId, {dispatch, queryFulfilled}) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(addToHistory(data.pokemon.name))
+                } catch(err) {
+                    console.error(err)
+                }
+            },
         }),
     })
 });
