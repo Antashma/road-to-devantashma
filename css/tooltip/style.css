@@ -1,0 +1,40 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.tooltip--container {
+    position: relative;
+    border-bottom: 1px dotted #666;
+    width: max-content;
+    cursor: help;
+    display: inline-flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+
+}
+
+.tooltip-text {
+    position: absolute;
+    top:calc(-100% - 10px);
+    width:max-content;
+    background-color: #666;
+    color: whitesmoke;
+    padding:5px;
+    border-radius: 5px;
+    font-size: small;
+    visibility: hidden;
+}
+
+.tooltip--container:hover .tooltip-text {
+    visibility: visible;
+}
+
+.tooltip-text::after {
+    content: "\25BC";
+    color: #666;
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 5px);
+}
