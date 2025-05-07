@@ -1,0 +1,96 @@
+main {
+    width: 80vw;
+    height:90vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    section {
+        width: 100%;
+    }
+}
+
+
+.title--container {
+    margin-bottom: 50px;
+    h1 {
+        font-family: "VT323", monospace;
+        font-size: 100px;
+        font-weight: normal;
+        color: whitesmoke;
+        padding: 10px;
+        background-color: black;
+        text-align: center;
+        margin:0;
+    }
+
+    p {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+}
+
+
+.buttons--container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.retro--container {
+    position: relative;
+    width: 175px;
+    height: 50px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: #33333300;
+    color:whitesmoke;
+    cursor: pointer;
+
+    &:hover {
+        color:lime;
+    }
+    
+    
+    .retro--text {
+        position: absolute;
+        font-family: "VT323", monospace;
+        font-size: 30px;
+
+        text-transform: uppercase;
+        letter-spacing: 2px;
+
+    }
+    
+    .retro--box1, .retro--box2 {
+        position: absolute;
+    }
+
+    .retro--box1 {
+        background-color: black;
+        width: 100%;
+        height: 44px;
+        /* border-left: 3px solid #444;
+        border-right: 3px solid #444; */
+
+    }
+
+    .retro--box2 {
+        background-color: black;
+        width: 169px;
+        height: 100%;
+        /* border-top: 3px solid #444;
+        border-bottom: 3px solid #444; */
+
+    }
+
+}
+
+
