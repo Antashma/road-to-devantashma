@@ -1,0 +1,18 @@
+{
+  "name": "tiny-library",
+  "version": "1.0.0",
+  "description": "jest practice app",
+  "type": "module",
+  "main": "tiny-library.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "antashma",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
+    "babel-jest": "^30.1.2",
+    "jest": "^30.1.3"
+  }
+}
