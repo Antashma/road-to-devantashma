@@ -25,3 +25,15 @@ print(full_name)
 #new line
 some_name = "Be\nau"
 print(some_name)
+
+#string stuff
+
+greeting = "hello"
+print("greeting slice", greeting[1:3])
+print(greeting[:2]) #he
+print(greeting[3:]) #lo
+
+
+#boolean
+done = True
+done = False
