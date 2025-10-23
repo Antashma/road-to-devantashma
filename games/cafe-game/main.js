@@ -2,15 +2,9 @@ import customers from "./customers.js";
 import menu from "./menu.js";
 
 function generateOrderTicket(customer) {
-    const {
-        name,
-        faveDrink
-    } = customer;
+    const { name, faveDrink } = customer;
 
-    
     let totalPrice = 0; 
-    //tickets use shorthand
-    //will get total price 
 
     const getMenuItemValue = (menuItem, customerItem) => {
         if (!customerItem) return "X";
@@ -85,10 +79,19 @@ function fillOrderTicketComponent(orderTicketData) {
     return;
 }
 
-for (let customer of customers) {
-    let ticket = generateOrderTicket(customer);
-    console.log({ticket});
-    fillOrderTicketComponent(ticket);
+const errol = customers[0]
+let errolTicket = generateOrderTicket(errol);
+fillOrderTicketComponent(errolTicket);
+
+//need a dict to ref shorthand meanings
+//hide & show toggle
+
+const shorthandRef = {
+    sizes: ["l = large", "m = medium", "s = small"],
+    brews: ["lite = light", "med = medium", "dark = (same)", "xcaf = decaf"],
+    temps: ["hot = (same)", "iced = (same)"],
+    milks: ["lf = low-fat", "nf = non-fat", "w = whole", "a = almond", "o = oat", "s = soy", "X = no milk"],
+    syrups: ["cr =  caramel", "v = vanilla", "hz = hazelnut", "m = mocha", "r = raspberry", "cl = classic"],
+    toppings: ["cinn = cinnamon", "wc = whipped cream", "crdr = caramel drizzle", "mdr = mocha drizzle"]
 }
-
-
+    

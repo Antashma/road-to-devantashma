@@ -7,7 +7,7 @@
 4. Queue advances; repeat until day ends.
 
 ### Acceptance checks (MVP):
-- You can start a “day,” complete 5+ orders, and reach a results screen with earnings and accuracy.
+- You can start a “day,” complete 3 orders, and reach a results screen with earnings and accuracy.
 
 ## 2. Lock the Menu Rules (so the game knows what’s legal)
 
@@ -64,15 +64,3 @@ coffe game mechanics
     - evaluation (pay & tips)
 
 game over
-
--------
-
-
-
-[coffee menu]
-types: hot, iced
-sizes: small, medium, large
-brews: light, medium, dark, decaf 
-milks: nonfat, whole, 2%, almond, oat, soy
-syrups: caramel, vanilla, hazelnut, mocha, raspberry
-toppings: cinnamon, whipped cream, caramel drizzle 
