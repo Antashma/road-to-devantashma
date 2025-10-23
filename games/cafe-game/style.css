@@ -1,0 +1,16 @@
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+li::before {
+    content: "- "
+}
+
+.order-value {
+    font-weight: bold;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Cafe Game</title>
+  </head>
+  <body>
+    <header>
+      <h1>Cafe Game</h1>
+      <p>Manage a simple cafe!</p>
+    </header>
+
+    <main>
+      <section id="order-ticket--container">
+        <p id="order-num">Ticket No. <span class="order-value"></span></p>
+        <p id="order-name">Customer: <span class="order-value"></span></p>
+        <ul>
+          <li id="order-size">Size: <span class="order-value"></span></li>
+          <li id="order-temp">Temp: <span class="order-value"></span></li>
+          <li id="order-brew">Brew: <span class="order-value"></span></li>
+          <li id="order-milk">Milk: <span class="order-value"></span></li>
+          <li id="order-syrups">Syrups: <span class="order-value"></span></li>
+          <li id="order-toppings">
+            Toppings: <span class="order-value"></span>
+          </li>
+        </ul>
+        <p id="order-price">
+          Price: <span class="order-details--value">0.00</span>
+        </p>
+      </section>
+      <button id="generate-order-btn">Generate Ticket!</button>
+    </main>
+
+    <script src="main.js" type="module"></script>
+  </body>
+</html>
