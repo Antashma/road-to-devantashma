@@ -1,5 +1,6 @@
 import customers from "./customers.js";
 import menu from "./menu.js";
+import shorthandRef from "./shorthandRef.js";
 
 function generateOrderTicket(customer) {
     const { name, faveDrink } = customer;
@@ -45,13 +46,6 @@ function generateOrderTicket(customer) {
     }
 }
 
-
-const genOrderBtn = document.querySelector("#generate-order-btn");
-
-genOrderBtn.addEventListener("click", () => {
-    console.log("order genrated!");
-});
-
 let currentOrderNum = 1;
 function fillOrderTicketComponent(orderTicketData) {
     
@@ -79,19 +73,40 @@ function fillOrderTicketComponent(orderTicketData) {
     return;
 }
 
+// TEST
 const errol = customers[0]
 let errolTicket = generateOrderTicket(errol);
 fillOrderTicketComponent(errolTicket);
 
-//need a dict to ref shorthand meanings
-//hide & show toggle
-
-const shorthandRef = {
-    sizes: ["l = large", "m = medium", "s = small"],
-    brews: ["lite = light", "med = medium", "dark = (same)", "xcaf = decaf"],
-    temps: ["hot = (same)", "iced = (same)"],
-    milks: ["lf = low-fat", "nf = non-fat", "w = whole", "a = almond", "o = oat", "s = soy", "X = no milk"],
-    syrups: ["cr =  caramel", "v = vanilla", "hz = hazelnut", "m = mocha", "r = raspberry", "cl = classic"],
-    toppings: ["cinn = cinnamon", "wc = whipped cream", "crdr = caramel drizzle", "mdr = mocha drizzle"]
+// need a dict to ref shorthand meanings
+// hide & show toggle
+const shRefElement = document.querySelector("#sh-ref");
+function toggleSHRef() {
+    shRefElement.classList.toggle("show");
 }
-    
+const shRefBtn = document.querySelector("#shorthand-ref--container button");
+shRefBtn.addEventListener("click", toggleSHRef);
+
+function fillShorthandRefEntry(shElement) {
+    const { id } = shElement;
+
+    const refKey = id.split("-")[1];
+    document.querySelector(`#${id} div`).innerHTML = shorthandRef[refKey].join("<br />");
+}
+
+for (let child of shRefElement.children) {
+    fillShorthandRefEntry(child);
+}
+
+function createDrinkStationButtons(menuCategory, dsElementId) {
+    menuCategory.forEach(item => {
+        const btn =  document.createElement("button");
+        btn.textContent = item.name;
+        document.querySelector(dsElementId).append(btn);
+    });
+}
+
+createDrinkStationButtons(menu.brew, "#ds-brews");
+createDrinkStationButtons(menu.milk, "#ds-milks");
+createDrinkStationButtons(menu.syrups, "#ds-syrups");
+createDrinkStationButtons(menu.brew, "#ds-toppings");
