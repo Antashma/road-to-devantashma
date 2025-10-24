@@ -98,11 +98,27 @@ for (let child of shRefElement.children) {
     fillShorthandRefEntry(child);
 }
 
+
+// DRINK ASSEMBLY STATION
 function handleDSBtnClick(e) {
     const { value } = e.target;
     console.log(value);
 }
 
+// CUP SIZE BUTTONS
+function createCupSizeButtons(cupElementId){
+    menu.size.forEach(size => {
+        const btn = document.createElement("button");
+        btn.textContent = size.name;
+        btn.value = size.name;
+        
+        btn.addEventListener("click", (e) => handleDSBtnClick(e));
+        
+        document.querySelector(cupElementId).append(btn);
+    });
+}
+
+// OTHER DRINK BUTTONS
 function createDrinkStationButtons(menuCategory, dsElementId) {
     menuCategory.forEach(item => {
         const btn =  document.createElement("button");
@@ -110,18 +126,6 @@ function createDrinkStationButtons(menuCategory, dsElementId) {
         btn.value = item.name;
         btn.addEventListener("click", (e) => handleDSBtnClick(e))
         document.querySelector(dsElementId).append(btn);
-    });
-}
-
-function createCupSizeButtons(cupElementId){
-    menu.size.forEach(size => {
-        const btn = document.createElement("button");
-        btn.textContent = size.name;
-        btn.value = size.name;
-        
-        btn.addEventListener("click", (e) => handleDSBtnClick(e))
-
-        document.querySelector(cupElementId).append(btn);
     });
 }
 
