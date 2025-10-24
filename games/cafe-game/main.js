@@ -98,13 +98,35 @@ for (let child of shRefElement.children) {
     fillShorthandRefEntry(child);
 }
 
+function handleDSBtnClick(e) {
+    const { value } = e.target;
+    console.log(value);
+}
+
 function createDrinkStationButtons(menuCategory, dsElementId) {
     menuCategory.forEach(item => {
         const btn =  document.createElement("button");
         btn.textContent = item.name;
+        btn.value = item.name;
+        btn.addEventListener("click", (e) => handleDSBtnClick(e))
         document.querySelector(dsElementId).append(btn);
     });
 }
+
+function createCupSizeButtons(cupElementId){
+    menu.size.forEach(size => {
+        const btn = document.createElement("button");
+        btn.textContent = size.name;
+        btn.value = size.name;
+        
+        btn.addEventListener("click", (e) => handleDSBtnClick(e))
+
+        document.querySelector(cupElementId).append(btn);
+    });
+}
+
+createCupSizeButtons("#hot-cups");
+createCupSizeButtons("#iced-cups");
 
 createDrinkStationButtons(menu.brew, "#ds-brews");
 createDrinkStationButtons(menu.milk, "#ds-milks");
