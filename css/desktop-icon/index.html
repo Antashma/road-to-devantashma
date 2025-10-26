@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Icons Buttons</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .desktop-icon--container {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            /* border: 1px solid lightcoral; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .icon-img {
+            width: 75%;
+            height: 75%;
+        }
+
+        .icon-text {
+            font-size: 1.5rem;
+            background-color: black;
+            color: white;
+            padding: 3px 0;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+            &.hover-bg {
+                background-color: hotpink;
+            }
+        }
+
+        .window {
+            width: 80vw;
+            height: auto;
+            margin: 10px;
+            border: 1px solid #000;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            font-size: 1.6rem;
+            .content {
+                display: flex;
+                padding: 10px;
+            }
+        }
+
+        #icons {
+            width: 100%;
+            display: flex;
+        }
+
+        #about {
+
+            display: flex;
+            flex-wrap: wrap;
+           
+            .content {
+                gap:10px;
+                justify-content: space-between;
+                .profile-img {
+                    width:200px;
+                    height: 200px;
+                    border: 1px solid #000;
+                }
+                p {
+                    background-color: #ccc;
+                    padding: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+
+        #contact {
+            p {
+                background-color: #ccc;
+                width: 100%;
+                padding:10px;
+            }
+            .content {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                form {
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    gap:15px;
+                    input, textarea {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        .title-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 5px 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            background-color: #000;
+            color: #fff;
+
+            span {
+                cursor: pointer;
+                font-size: 1.5rem;
+                border: 1px solid #444;
+                border-radius: 3px;
+                padding: 5px 10px;
+                &:hover {
+                    background-color: hotpink;
+                }
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Desktop Icons</h1>
+        <p>Double-click an icon to bring up its window. When the window is open, click "X" to close it.</p>
+
+        <nav id="icons">
+            <div id="about-icon" class="desktop-icon--container">
+                <img class="icon-img" src="./heart.png" alt="about icon"/>
+                <p class="icon-text">About</p>
+            </div>
+
+            <div id="contact-icon" class="desktop-icon--container">
+                <img class="icon-img" src="./contact-icon.png" alt="contact icon"/>
+                <p class="icon-text">Contact</p>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <section id="about" class="window">
+            <div class="title-bar">
+                <h2>About Me</h2>
+                <span class="close-btn">X</span>
+            </div>
+            <div class="content">
+                <img src="./pfp.jpg" class="profile-img" alt="profile picture"/>
+                <p>I am a technical support professional with an expertise in full stack web development. I have strong technical skills, enjoy problem-solving, and having a direct impact on client success by making things work. As a Learner Assistant for a software bootcamp, I pride myself on being the "go-to" for aspiring engineers, providing both mentorship and technical support. I've helped students successfully deliver projects, improve their skills and confidence, while contributing to stronger student retention rates.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="window" style="display: none;">
+            <div class="title-bar">
+                <h2>Contact Me</h2>
+                <span class="close-btn">X</span>
+            </div>
+            <div class="content">
+                <p>Looking to connect? Send me an email!</p>
+                <form>
+                    <label>
+                       Name:
+                        <input type="text"/>
+                    </label>
+                    <label>
+                        Email:
+                        <input type="text"/>
+                    </label>
+                    <label>
+                        Message:
+                        <textarea></textarea>
+                    </label>
+                    <input type="submit" />
+                </form>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- <footer>
+        <p><a href="https://www.flaticon.com/free-icons/smile" title="smile icons">Smile icons created by Smashicons - Flaticon</a></p>
+    </footer> -->
+</body>
+
+<script>
+    const iconImgArr = document.querySelectorAll(".icon-img");
+    const iconTextArr = document.querySelectorAll(".icon-text");
+    const iconContainerArr = document.querySelectorAll(".desktop-icon--container");
+    const closeBtnArr = document.querySelectorAll(".close-btn");
+
+    function closeWindow(id){
+        const targetWindowElement = document.querySelector(`#${id}`);
+        targetWindowElement.style = "display: none"; 
+    }
+    
+    function openWindow(id){
+        const targetWindowElement = document.querySelector(`#${id}`);
+        targetWindowElement.style = "";
+    }
+
+    iconContainerArr.forEach(iconContainer => {
+        iconContainer.addEventListener("mouseover", () => {
+            iconContainer.children[1].classList.add("hover-bg");
+        });
+
+        iconContainer.addEventListener("mouseout", () => {
+            iconContainer.children[1].classList.remove("hover-bg");
+        }); 
+
+        iconContainer.addEventListener("dblclick", (e) => {
+            const windowId = e.currentTarget.id.split("-")[0];
+            openWindow(windowId);
+        });
+    });
+
+    iconTextArr.forEach(iconText => {
+        iconText.addEventListener("selectstart", (e) => {
+            e.preventDefault();
+        }); 
+    });
+
+    closeBtnArr.forEach(closeBtn => {
+        closeBtn.addEventListener("click", ({ target }) => {
+            const windowId = target.parentElement.parentElement.id;
+            closeWindow(windowId);
+        });
+    });
+
+
+
+
+
+    
+</script>
+</html>
