@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Bunny | A tiny friend who mirrors your mood</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>(\___/) <br /> Mood Bunny</h1>
+        <p class="subtitle">A tiny friend who mirrors your mood.</p>
+    </header>
+    
+    <main>
+        <section id="mood-bunny">
+            <div id="mood-name"></div>
+            <div id="bunny-art"></div>
+            <div id="speech-bubble"></div>
+        </section>
+
+        <section id="mood-controls">
+            <h2>Change mood:</h2>
+            <div id="mood-picker">
+                <input type="radio" name="current-mood" id="happy" checked>
+                <label for="happy">happy</label> <br>
+                <input type="radio" name="current-mood" id="loving">
+                <label for="loving">loving</label> <br>
+                <input type="radio" name="current-mood" id="suprised">
+                <label for="suprised">suprised</label> <br>
+                <input type="radio" name="current-mood" id="scared">
+                <label for="scared">scared</label> <br>
+                <input type="radio" name="current-mood" id="angry">
+                <label for="angry">angry</label> <br>
+                <input type="radio" name="current-mood" id="sad">
+                <label for="sad">sad</label> <br>
+                <input type="radio" name="current-mood" id="tired">
+                <label for="tired">tired</label> <br>
+            </div>
+            <button id="set-mood-btn">Set mood</button>
+        </section>
+
+        <section id="mood-history">
+            <h2>Today moods:</h2>
+            <div>
+                6:00 am (✿◡‿◡) happy • 12:30 pm X﹏X tired •  6:30 pm (❁´◡`❁) loving
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with ❤️ & ☕ by Antashma</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
