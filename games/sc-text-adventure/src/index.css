@@ -1,0 +1,21 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	/* min-height: 0; */
+	font-size: 2rem;
+	background: url(./darkness.webp) fixed;
+	backdrop-filter: grayscale(100%);
+}
+
